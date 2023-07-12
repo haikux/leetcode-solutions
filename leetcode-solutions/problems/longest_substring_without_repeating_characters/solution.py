@@ -1,11 +1,11 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         freq_map = {}
-
         start, end = 0, 0
-        res = 0
+        counter = 0
+        l = 0
 
-        while(end < len(s)):
+        while end < len(s):
             e = s[end]
 
             if e in freq_map:
@@ -14,9 +14,10 @@ class Solution:
                     del freq_map[s[start]]
                 start += 1
             else:
-                freq_map[e] = 1
+                freq_map[s[end]] = 1
                 end += 1
             
-            res = max(res, end-start)
+
+            l = max(l, end-start)
         
-        return res
+        return l
