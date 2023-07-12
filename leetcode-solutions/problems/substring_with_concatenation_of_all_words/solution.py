@@ -1,35 +1,53 @@
 class Solution:
     def findSubstring(self, s: str, words: List[str]) -> List[int]:
-        if not words:
-            return []
+        freq_map = {}
+        res = []
+
+        start, end = 0, 0
+        windowsz = 0
+        wordsz = len(words[0])
+
+        for i in words:
+            if i in freq_map:
+                freq_map[i] += 1
+            else:
+                freq_map[i] = 1
+            windowsz += len(i)
         
-        word_len = len(words[0])
-        word_total = len(words)
-        words_count = Counter(words)
-        result = []
-        
-        for i in range(word_len):
-            left = i
-            right = i
-            count = 0
-            curr_count = Counter()
+        counter = len(freq_map)
+
+        if windowsz > len(s) or len(words) == 0:
+            return res
+
+        for i in range(wordsz):
+            start = end = i
+            freqm = dict(freq_map)
+            counter = len(freqm)
             
-            while right + word_len <= len(s):
-                w = s[right:right+word_len]
-                right += word_len
+            while(end+wordsz-1 < len(s)):
+                lastw = s[end: end + wordsz]
+                if lastw in freqm:
+                    freqm[lastw] -= 1
+                    if freqm[lastw] == 0:
+                        counter -= 1
                 
-                if w not in words_count:
-                    left = right
-                    curr_count.clear()
-                    count = 0
-                else:
-                    curr_count[w] += 1
-                    count += 1
-                    while curr_count[w] > words_count[w]:
-                        left_w = s[left:left+word_len]
-                        left += word_len
-                        curr_count[left_w] -= 1
-                        count -= 1
-                    if count == word_total:
-                        result.append(left)
-        return result
+                end += wordsz
+                
+                while(end-start >= windowsz):
+                    if counter == 0:
+                        res.append(start)
+                    
+                    firstw = s[start: start + wordsz]
+                    if firstw in freqm:
+                        freqm[firstw] += 1
+                        if freqm[firstw] == 1:
+                            counter += 1
+                    
+                    start += wordsz
+            
+                
+        
+        return res
+
+                
+            
