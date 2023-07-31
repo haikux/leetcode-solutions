@@ -23,4 +23,3 @@ class Solution:
             curr = curr.next
         
         return copymap[head]
-        
