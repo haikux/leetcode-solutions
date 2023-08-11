@@ -10,18 +10,17 @@ class Solution:
         if root:
             dq.append(root)
         res = []
-
         while dq:
             val = []
-            for i in range(len(dq)):
+            for _ in range(len(dq)):
                 n = dq.popleft()
                 val.append(n.val)
-
                 if n.left:
                     dq.append(n.left)
                 if n.right:
                     dq.append(n.right)
             res.append(val)
         return res
+
 
             
