@@ -7,11 +7,16 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         
-        def bst(root, left, right):
-            if not root:
+        def bst(node, left, right):
+            # A null node is a valid BST
+            if not node:
                 return True
-            if not (root.val > left and root.val < right):
+            if not (node.val > left and node.val < right):
                 return False
             
-            return bst(root.left, left, root.val) and bst(root.right, root.val, right)
+            # Both these must be true at all the times for the tree
+            # to be a valid BST
+            return bst(node.left, left, node.val) and \
+            bst(node.right, node.val, right)
+        
         return bst(root, float("-inf"), float("inf"))
