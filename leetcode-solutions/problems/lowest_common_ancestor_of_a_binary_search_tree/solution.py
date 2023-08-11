@@ -16,3 +16,5 @@ class Solution:
                 curr = curr.right
             else:
                 return curr
+
+            
