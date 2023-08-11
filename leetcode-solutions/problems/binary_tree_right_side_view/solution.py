@@ -22,3 +22,4 @@ class Solution:
                     dq.append(n.right)
             res.append(val[-1])
         return res
+
