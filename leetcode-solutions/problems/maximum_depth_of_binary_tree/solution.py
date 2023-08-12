@@ -24,8 +24,23 @@ class Solution:
         return level
         """
 
+        """
         # DFS - recursive
         if not root:
             return 0
 
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+        """
+
+        # DFS - iterative
+        st = [[root, 1]]
+        level = 0
+        while st:
+            n, d = st.pop()
+            if n:
+                level = max(d, level)
+                st.append([n.left, d + 1])
+                st.append([n.right, d + 1])
+        
+        return level
+            
