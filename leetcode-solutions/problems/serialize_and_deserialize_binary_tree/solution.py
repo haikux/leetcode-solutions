@@ -13,6 +13,8 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
+        # Generate a serialized string with nodes of the
+        # Binary tree. Null - "N" and all seperated with a comma
         result = []
         def dfs(node):
             if not node:
@@ -24,25 +26,32 @@ class Codec:
         dfs(root)
         return ",".join(result)
 
+        
+
     def deserialize(self, data):
         """Decodes your encoded data to tree.
         
         :type data: str
         :rtype: TreeNode
         """
-        v = data.split(",")
+        # Deserializing with given a string
+        new_data = data.split(",")
+        # Global index to traverse the serialized tree
         self.idx = 0
-
         def dfs():
-            if v[self.idx] == "N":
+            if new_data[self.idx] == "N":
                 self.idx += 1
                 return None
-            node = TreeNode(int(v[self.idx]))
+            # Convert the string back to integer
+            node = TreeNode(int(new_data[self.idx]))
             self.idx += 1
             node.left = dfs()
             node.right = dfs()
             return node
+
         return dfs()
+
+            
 
         
 
