@@ -1,26 +1,28 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
+        """
+        Key idea is recognising that the left side and
+        right sorted sides of the rotated array require different
+        searching strategy.
+        """
         l, r = 0, len(nums)-1
 
         while l <= r:
-            mid = (l + r) // 2
-            if nums[mid] == target:
-                return mid
+            m = (l + r) // 2
+            if nums[m] == target:
+                return m
             
-            if nums[mid] >= nums[l]:
-                if target > nums[mid]:
-                    l = mid + 1
-                elif target < nums[l]:
-                    l = mid + 1
+            # Left portion
+            if nums[l] <= nums[m]:
+                # Now check where the target might be in
+                if target < nums[l] or target > nums[m]:
+                    l = m + 1
                 else:
-                    r = mid - 1
+                    r = m - 1
+            # Right portion
             else:
-                if target < nums[mid]:
-                    r = mid - 1
-                elif target > nums[r]:
-                    r = mid - 1
+                if target > nums[r] or target < nums[m]:
+                    r = m - 1
                 else:
-                    l = mid + 1
-
+                    l = m + 1
         return -1
-            
