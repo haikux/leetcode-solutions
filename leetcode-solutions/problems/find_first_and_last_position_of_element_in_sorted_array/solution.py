@@ -1,12 +1,12 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        l, r = [-1, -1] 
-        l = self.binarySearch(nums, target, True)
-        r = self.binarySearch(nums, target)
-        return [l, r]
+        lr, rr = [-1, -1]
+        lr = self.binarySearch(nums, target, True)
+        rr = self.binarySearch(nums, target)
+        return [lr, rr]
     
     def binarySearch(self, nums, target, left=False):
-        l, r = 0, len(nums)-1
+        l, r = 0, len(nums) - 1
         res = -1
         while l <= r:
             m = (l + r) // 2
@@ -21,5 +21,6 @@ class Solution:
                 else:
                     l = m + 1
         return res
+        
                 
         
