@@ -19,3 +19,25 @@ class Solution:
                 return curr.val
             curr = curr.right
         
+        """
+        # Recursive
+        count = [0]
+        result = [0]
+        def dfs(root, k):
+            if not root:
+                return [0]
+            
+            dfs(root.left, k)
+
+            count[0] += 1
+            if count[0] == k:
+                result[0] = root.val
+                return result
+
+            dfs(root.right, k)
+
+            return result
+        dfs(root, k)
+        return result[0]
+        """
+        
