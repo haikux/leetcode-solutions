@@ -17,6 +17,7 @@ class Solution:
         
         return dfs(0, nums)
         """
+        """
         n = len(nums)
         dp = [None for _ in range(n + 1)]
 
@@ -25,6 +26,15 @@ class Solution:
             dp[i] = max(dp[i+1], nums[i] + dp[i+2])
         
         return dp[0]
+        """
+        first = last = 0
+
+        for i in nums:
+            tmp = first
+            first = max(first, last + i)
+            last = tmp
+        
+        return first
 
         
         
