@@ -9,6 +9,17 @@ class Solution:
         return mincost[-1]
         """
 
+        # DP - Constant Time
+        first = second = 0
+
+        for i in range(2, len(cost)+1):
+            tmp = first
+            first = second
+            second = min(cost[i-1] + first, cost[i-2] + tmp)
+        return second
+        
+
+        """
         # Backtracking + Memoization
         self.mem = {}
 
@@ -24,8 +35,9 @@ class Solution:
             self.mem[j] = min(left, right)
 
             return self.mem[j]
-        self.mem = {}
+
         return dfs(len(cost))
+        """
 
 
         
