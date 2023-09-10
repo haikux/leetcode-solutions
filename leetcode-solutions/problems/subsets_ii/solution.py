@@ -14,3 +14,27 @@ class Solution:
                 self.sub.pop()
         sets(0, nums)
         return self.super
+
+
+        """
+        Backtracking solution 1
+        
+        nums = sorted(nums)
+        result = []
+        sub = []
+
+        def dfs(j):
+            if j >= len(nums):
+                return result.append(sub.copy())
+            
+            sub.append(nums[j])
+            dfs(j+1)
+
+            # Skip considering next elements' if they are the same
+            while (j + 1) < len(nums) and nums[j] == nums[j+1]: j += 1
+            sub.pop()
+            dfs(j+1)
+
+        dfs(0)
+        return result
+        """
