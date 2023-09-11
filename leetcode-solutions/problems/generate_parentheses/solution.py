@@ -6,6 +6,7 @@ class Solution:
         def bktrack(o, c):
             if o == c == n:
                 result.append(''.join(res.copy()))
+                return
             if o < n:
                 res.append("(")
                 bktrack(o+1, c)
